@@ -20,15 +20,13 @@ const createUser = (req, res) => {
     const { id } = req.params;
     res.json({
         msg: "create users",
-        body
     });
 };
 exports.createUser = createUser;
 const updateUser = (req, res) => {
-    const { id } = req.params;
+    /*   const {id}=  req.params */
     res.json({
         msg: "update users",
-        id
     });
 };
 exports.updateUser = updateUser;
