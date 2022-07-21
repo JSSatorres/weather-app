@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;1,700&display=swap');
+
+$Rubik : 'Rubik', sans-serif;
+
+//colors
+$dark:#23394d;
+$light: #fff;
+$primary: #e07924;
+$secondary: #64b2ff;
+$tertiary: rgb#e0792a;
+$quarter: rgb(162,162,246);
+$danger:rgb(240, 37, 37);
+$bg: rgb(244,244,255);
+
+//spacing
+$spacing-md:16px;
+$spacing-lg:32px;
+
+//border radiius
+$borderRadius:12px;
+
+//font size
+$fonstSize-lg:32px;
+$fonstSize-md:24px;
+$fonstSize-sm:18px;
+$fonstSize-xs:12px;
+
+//icons
+
+
+
+// header hight 
+$headerHight: 70px;
+
+@mixin breakpoint($point){
+    @if $point == md{
+        //768px
+        @media (min-width:48em){
+            @content;
+        }
+    }
+}
