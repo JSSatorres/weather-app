@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaFirstOrderAlt,FaBars } from "react-icons/fa";
-
+import { classNames } from "../../utils/class";
 
 import "./nav.scss"
 
 const Nav = () => {
+
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+
+  const handleClick=()=>{
+    setShowMobileMenu(!showMobileMenu)
+    console.log(showMobileMenu);
+    
+  }
   return (
     <header className="container">
       <div className="container__wrapper">
@@ -14,8 +22,8 @@ const Nav = () => {
           <p>Wheater</p>
           <p>App</p>
         </div>
-        <div className="container__wrapper__mobileIcon"> <FaBars/></div>         
-        <ul className="container__wrapper__menu">
+        <div className="container__wrapper__mobileIcon" onClick={handleClick}> <FaBars /></div>         
+        <ul className= {classNames("container__wrapper__menu", showMobileMenu ? "" : "colapsed")}>
           <li className="container__wrapper__menu__menuItem">
             <NavLink className="container__wrapper__menu__menuItem__link" to="/">Home</NavLink>
           </li>

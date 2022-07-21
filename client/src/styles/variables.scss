@@ -4,10 +4,11 @@ $Rubik : 'Rubik', sans-serif;
 
 //colors
 $dark:#23394d;
+$darkLight:#243f58;
 $light: #fff;
 $primary: #e07924;
 $secondary: #64b2ff;
-$tertiary: rgb#e0792a;
+$tertiary: #d36613;
 $quarter: rgb(162,162,246);
 $danger:rgb(240, 37, 37);
 $bg: rgb(244,244,255);
@@ -17,7 +18,8 @@ $spacing-md:16px;
 $spacing-lg:32px;
 
 //border radiius
-$borderRadius:12px;
+$borderRadius-lg:32px;
+$borderRadius-md:12px;
 
 //font size
 $fonstSize-lg:32px;

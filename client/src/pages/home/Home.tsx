@@ -1,12 +1,12 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
 import Nav from '../../components/nav'
+import Wheather from '../wheather'
 
 const Home = () => {
   return (
     <>
         <Nav/>
-        <Outlet />
+        <Wheather/>
     </>
   )
 }

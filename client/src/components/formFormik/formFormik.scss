@@ -1,0 +1,71 @@
+@import '../../styles/variables.scss';
+
+.wrapper{
+    height: 500px;
+    background-color: $darkLight;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    color:$light;
+    padding: 150px;
+
+    &__form{
+        color: black;
+        background-color: $light;
+        border-radius:$borderRadius-lg ;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-shadow: inset;
+        box-shadow: 2px 3px $tertiary;
+
+        h2{
+            color:$dark;
+            text-align: center;
+            margin: 6px auto;
+        }
+        
+        &__field{
+            width: 70%;
+            align-items: center;
+            margin: 3px auto; 
+            box-shadow: 1px 0.5px $tertiary;
+
+        }
+        &__label{
+            width: 70%;
+            align-items: center;
+            margin: 3px auto;
+           
+        }
+    }
+    &__button{
+        width: 70%;
+        margin: 30px auto;
+        min-width: 130px;
+        height: 40px;
+        color:$dark;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background: $primary;
+        box-shadow: 0 5px $tertiary;
+     
+      &:hover {
+        box-shadow: 0 3px $tertiary;
+        top: 1px;
+      }
+      &:active {
+        box-shadow: 0 0 $tertiary;
+        top: 5px;
+      }
+    
+    }
+}
