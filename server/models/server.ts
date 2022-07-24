@@ -1,5 +1,8 @@
 import express, {Application} from "express"
 import userRouter from "../routes/user-routes";
+import cors from "cors"
+
+import db from "../db/concectionDB";
 
 class Server {
 
@@ -12,9 +15,28 @@ class Server {
     constructor(){
         this.app = express();
         this.port = process.env.PORT || "5000";
+      /*   this.connectionDB() */
+        this.middlewares()
+        this.routes();        
+    }
 
-        //routes
-        this.routes();
+    async connectionDB (){
+        try {
+            await db.authenticate();
+            console.log("database is connection");                  
+
+        } catch (error:any) {
+            console.log(error);          
+            throw new Error(error);            
+        }
+    }
+
+    middlewares(){
+        //cors
+        this.app.use(cors())
+
+        //read body
+        this.app.use(express.json())
     }
 
     routes (){

@@ -1,27 +1,62 @@
 import { Request, Response } from "express";
+import User from "../models/user-models-mysql";
 
-export const getUsers = (req: Request, res: Response) => {
-  res.json({
-    msg: "get users",
-  });
+export const getUsers = async (req: Request, res: Response) => {  
+  try {
+    const users = await User.findAll();
+    res.json({users});
+  } catch (error :any) {
+    console.log(error);    
+    res.status(500).json({msg:"something go wrong"})   
+  }
 };
 
-export const getUser = (req: Request, res: Response) => {
+export const getUser = async (req: Request, res: Response) => {
   const {id}=  req.params
-  res.json({
-    msg: "get user",
-    id
-    
-  });
+
+  try {
+    const user = await User.findByPk(id)
+    if (user){
+      res.json({user});
+    }else{
+      res.json(`the user with the ${id} doenst exits`)
+    }   
+
+  } catch (error :any) {
+    console.log(error);    
+    res.status(500).json({msg:"something go wrong"})   
+  }
+ 
 };
 
-export const createUser = (req: Request, res: Response) => {
-  const {body}=  req
-  const {id}=  req.params
-  res.json({
-    msg: "create users",
-    
-  });
+export const createUser = async (req: Request, res: Response) => {
+  const {body} =  req
+  console.log(body);
+  
+
+  try {
+     const emailExits = await User.findOne({
+      where:{
+        email:body.email
+      }
+
+    })
+
+    if (emailExits){
+      return res.status(400).json({
+        msg:`the email  ${body.email} is already registred`
+      })
+    } 
+   const newUser = await User.create(body) 
+    /* await newUser.save()  */   
+
+     res.json({body,newUser}) 
+
+
+  } catch (error :any) {
+    console.log(error);    
+    res.status(500).json({msg:"something go wrong"})   
+  }
 };
 
 export const updateUser = (req: Request, res: Response) => {
