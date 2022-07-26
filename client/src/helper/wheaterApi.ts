@@ -18,7 +18,7 @@ const wheatherApi = async (city:String)=>{
     const data = await response.json()
     console.log(data);
 
-    if (data.cod) {
+    if (data.length===0) {
         return {msg:"this city does not exist"}
     }
     

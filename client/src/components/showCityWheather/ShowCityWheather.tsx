@@ -17,12 +17,13 @@ interface cityData{
   interface cities {
     city: Array<cityData> 
   }
+  //TODO: controll to the city doesnt found in the apì
 
 const ShowCityWheather = ({city}:cities) => {
-   
+
   return (
     <div>
-
+      
       {city.map((oneCity,index)=>{
         return(
           <div key={index}>
@@ -33,14 +34,6 @@ const ShowCityWheather = ({city}:cities) => {
           </div>
         ) 
       })}
-
-        {/* <h3>name{city.name}</h3> */}
-       {/*  <h4>country  {city.country}</h4> */}
-       {/*  <h5>actual time: {city.observation_time}</h5> */}
-
-       {/*  <p>temperature{city.temperature}</p>  */}
-      {/*   <image>{city.weather_icons}</image>
- */}
     </div>
   )
 }

@@ -11,6 +11,8 @@ interface cityData{
   lat:Number,
 }
 
+//FIXME:  the inital state always return 
+
 const INITIAL_STATE = ({
   name: "",
   country: "",
@@ -18,13 +20,15 @@ const INITIAL_STATE = ({
   lon: 0,
   lat: 0,
 })
-
+ 
 
 const Wheather = () => {
   const [city, setCity] = useState<Array<cityData>>([INITIAL_STATE])
  
  const cityNameData =  async(newCity:String)=>{
    const wheatherData =  await wheatherApi(newCity);
+   console.log("el wheterewdfdfsdf",wheatherData);
+   
    setCity(wheatherData) 
    console.log(city);
        
