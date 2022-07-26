@@ -13,15 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const config_1 = require("../config/config");
-const dbConnectionMongo = () => __awaiter(void 0, void 0, void 0, function* () {
+const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(config_1.MONGO_URL);
+        yield mongoose_1.default.connect(process.env.MONGO_DB_CNN);
+        console.log("conexion a base de datos realizda");
     }
     catch (error) {
         console.log(error);
         throw new Error("Error a la hora de iniciar la base de datos");
     }
 });
-exports.default = dbConnectionMongo;
-//# sourceMappingURL=concectionDB.js.map
+exports.default = dbConnection;
+//# sourceMappingURL=config.js.map

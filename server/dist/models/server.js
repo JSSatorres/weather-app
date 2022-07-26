@@ -16,21 +16,22 @@ const express_1 = __importDefault(require("express"));
 const user_routes_1 = __importDefault(require("../routes/user-routes"));
 const cors_1 = __importDefault(require("cors"));
 const concectionDB_1 = __importDefault(require("../db/concectionDB"));
+const config_1 = require("../config/config");
 class Server {
     constructor() {
         this.apiPaths = {
             users: '/api/users'
         };
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || "5000";
-        /*   this.connectionDB() */
+        this.port = config_1.PORT || "5000";
+        this.connectionDB();
         this.middlewares();
         this.routes();
     }
     connectionDB() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield concectionDB_1.default.authenticate();
+                yield (0, concectionDB_1.default)();
                 console.log("database is connection");
             }
             catch (error) {

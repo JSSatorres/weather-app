@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser = exports.getUsers = void 0;
-const user_models_mysql_1 = __importDefault(require("../models/user-models-mysql"));
+const user_models_1 = __importDefault(require("../models/user-models"));
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield user_models_mysql_1.default.findAll();
+        const users = yield user_models_1.default.find();
         res.json({ users });
     }
     catch (error) {
@@ -28,13 +28,13 @@ exports.getUsers = getUsers;
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const user = yield user_models_mysql_1.default.findByPk(id);
-        if (user) {
-            res.json({ user });
-        }
-        else {
-            res.json(`the user with the ${id} doenst exits`);
-        }
+        /*  const user = await User.findByPk(id)
+         if (user){
+           res.json({user});
+         }else{
+           res.json(`the user with the ${id} doenst exits`)
+         }
+      */
     }
     catch (error) {
         console.log(error);
@@ -44,21 +44,21 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getUser = getUser;
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    console.log(body);
     try {
-        const emailExits = yield user_models_mysql_1.default.findOne({
-            where: {
-                email: body.email
-            }
-        });
-        if (emailExits) {
-            return res.status(400).json({
-                msg: `the email  ${body.email} is already registred`
-            });
-        }
-        const newUser = yield user_models_mysql_1.default.create(body);
-        /* await newUser.save()  */
-        res.json({ body, newUser });
+        /* const emailExits = await User.findOne({
+         where:{
+           email:body.email
+         }
+    */
+        /*   }) */
+        /*  if (emailExits){
+           return res.status(400).json({
+             msg:`the email  ${body.email} is already registred`
+           })
+         } */
+        const newUser = yield user_models_1.default.create(body);
+        yield newUser.save();
+        res.json({ body });
     }
     catch (error) {
         console.log(error);

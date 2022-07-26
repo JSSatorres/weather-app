@@ -2,7 +2,8 @@ import express, {Application} from "express"
 import userRouter from "../routes/user-routes";
 import cors from "cors"
 
-import db from "../db/concectionDB";
+import dbConnectionMongo from "../db/concectionDB";
+import { PORT } from "../config/config";
 
 class Server {
 
@@ -14,15 +15,15 @@ class Server {
 
     constructor(){
         this.app = express();
-        this.port = process.env.PORT || "5000";
-      /*   this.connectionDB() */
+        this.port = PORT || "5000";
+        this.connectionDB()
         this.middlewares()
         this.routes();        
     }
 
     async connectionDB (){
         try {
-            await db.authenticate();
+            await dbConnectionMongo()
             console.log("database is connection");                  
 
         } catch (error:any) {

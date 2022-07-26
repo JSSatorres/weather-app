@@ -1,27 +1,27 @@
 import { Request, Response } from "express";
-import User from "../models/user-models-mysql";
+import User from "../models/user-models";
 
 export const getUsers = async (req: Request, res: Response) => {  
   try {
-    const users = await User.findAll();
+    const users = await User.find();
     res.json({users});
   } catch (error :any) {
     console.log(error);    
     res.status(500).json({msg:"something go wrong"})   
-  }
+  } 
 };
 
 export const getUser = async (req: Request, res: Response) => {
   const {id}=  req.params
 
   try {
-    const user = await User.findByPk(id)
+   /*  const user = await User.findByPk(id)
     if (user){
       res.json({user});
     }else{
       res.json(`the user with the ${id} doenst exits`)
     }   
-
+ */
   } catch (error :any) {
     console.log(error);    
     res.status(500).json({msg:"something go wrong"})   
@@ -31,26 +31,25 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   const {body} =  req
-  console.log(body);
-  
+
 
   try {
-     const emailExits = await User.findOne({
+     /* const emailExits = await User.findOne({
       where:{
         email:body.email
       }
+ */
+  /*   }) */
 
-    })
-
-    if (emailExits){
+   /*  if (emailExits){
       return res.status(400).json({
         msg:`the email  ${body.email} is already registred`
       })
-    } 
-   const newUser = await User.create(body) 
-    /* await newUser.save()  */   
+    } */
+    const newUser = await User.create(body) 
+    await newUser.save() 
 
-     res.json({body,newUser}) 
+     res.json({body})  
 
 
   } catch (error :any) {
