@@ -65,18 +65,6 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { name, password, email, rol } = req.body;
     try {
         const newUser = yield user_models_1.default.create({ name, password, email, rol });
-        // check emial exits
-        /* const emailExits = await User.findOne({
-         where:{
-           email:body.email
-         }
-    */
-        /*   }) */
-        /*  if (emailExits){
-           return res.status(400).json({
-             msg:`the email  ${body.email} is already registred`
-           })
-         } */
         //encrrypt password
         const salt = bcryptjs_1.default.genSaltSync(10);
         newUser.password = bcryptjs_1.default.hashSync(password, salt);
@@ -85,7 +73,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ msg: "something go wrong" });
+        res.status(500).json({ msg: "aaaa este eroror adasdad" });
     }
 });
 exports.createUser = createUser;

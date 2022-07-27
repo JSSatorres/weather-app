@@ -47,42 +47,20 @@ export const getUser = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
 
   const {name,password,email,rol} =  req.body
-  
-  
-  try {
+    
+  try {    
     const newUser = await User.create({name,password,email,rol}) 
-    // check emial exits
-
-     /* const emailExits = await User.findOne({
-      where:{
-        email:body.email
-      }
- */
-  /*   }) */
-
-
-      /*  if (emailExits){
-         return res.status(400).json({
-           msg:`the email  ${body.email} is already registred`
-         })
-       } */
-
-
     //encrrypt password
-
     const salt = bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password,salt)
     
-
-   
     await newUser.save() 
 
-     res.json({newUser})  
-
+    res.json({newUser})  
 
   } catch (error :any) {
     console.log(error);    
-    res.status(500).json({msg:"something go wrong"})   
+    res.status(500).json({msg:"aaaa este eroror adasdad"})   
   }
 };
 

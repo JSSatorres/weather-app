@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const RoleSchema = new Schema({
     rol:{
         type:String,
-        require:[true, "el rol es obligatorio"],
+        require:[true, "the rol is reqired"],
     },
 })
 export default model("Roles",RoleSchema)
