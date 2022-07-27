@@ -19,7 +19,17 @@ userRouter.post("/", [
     (0, express_validator_1.check)("email").custom(email => (0, db_validators_1.validatorEmail)(email)),
     validator_fields_1.validatorField
 ], user_controller_1.createUser);
-userRouter.put("/:id", user_controller_1.updateUser);
-userRouter.delete("/:id", user_controller_1.deleteUser);
+userRouter.put("/:id", [
+    (0, express_validator_1.check)("id", "the id is not valid").isMongoId(),
+    (0, express_validator_1.check)("id").custom(id => (0, db_validators_1.validaotorMongoId)(id)),
+    (0, express_validator_1.check)("rol").custom(rol => (0, db_validators_1.validatorRole)(rol)),
+    validator_fields_1.validatorField
+], user_controller_1.updateUser);
+userRouter.delete("/:id", [
+    (0, express_validator_1.check)("id", "the id is not valid").isMongoId(),
+    (0, express_validator_1.check)("id").custom(id => (0, db_validators_1.validaotorMongoId)(id)),
+    (0, express_validator_1.check)("rol").custom(rol => (0, db_validators_1.validatorRole)(rol)),
+    validator_fields_1.validatorField
+], user_controller_1.deleteUser);
 exports.default = userRouter;
 //# sourceMappingURL=user-routes.js.map

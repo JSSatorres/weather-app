@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validatorEmail = exports.validatorRole = void 0;
+exports.validaotorMongoId = exports.validatorEmail = exports.validatorRole = void 0;
 const role_model_1 = __importDefault(require("../models/role-model"));
 const user_models_1 = __importDefault(require("../models/user-models"));
 const validatorRole = (rol = "") => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,4 +29,11 @@ const validatorEmail = (email = "") => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.validatorEmail = validatorEmail;
+const validaotorMongoId = (id = "") => __awaiter(void 0, void 0, void 0, function* () {
+    const idExits = yield user_models_1.default.findOne({ id });
+    if (!idExits) {
+        throw new Error(`the id: ${id} did not exist`);
+    }
+});
+exports.validaotorMongoId = validaotorMongoId;
 //# sourceMappingURL=db-validators.js.map

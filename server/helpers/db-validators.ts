@@ -11,7 +11,13 @@ export const validatorRole = async(rol="")=>{
 export const validatorEmail = async(email="")=>{
     const emailExits = await Users.findOne({email})    
     if(emailExits){
-        throw new Error(`the email  ${email} is already registred`)
-    
+        throw new Error(`the email  ${email} is already registred`)    
+    } 
+}
+
+export const validaotorMongoId = async(id="")=>{
+    const idExits = await Users.findOne({id})    
+    if(!idExits){
+        throw new Error(`the id: ${id} did not exist`)    
     } 
 }

@@ -80,14 +80,14 @@ exports.createUser = createUser;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const _a = req.body, { _id, password, google, email } = _a, rest = __rest(_a, ["_id", "password", "google", "email"]);
-    /* if (password) {
-      const salt = bcrypt.genSaltSync();
-      rest.password = bcrypt.hashSync(password, salt);
-    } */
+    if (password) {
+        const salt = bcryptjs_1.default.genSaltSync();
+        rest.password = bcryptjs_1.default.hashSync(password, salt);
+    }
     const user = yield user_models_1.default.findByIdAndUpdate(id, rest);
     res.json({
         msg: "put Api",
-        id,
+        user
     });
 });
 exports.updateUser = updateUser;

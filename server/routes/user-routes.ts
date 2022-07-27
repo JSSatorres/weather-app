@@ -3,7 +3,7 @@ import { check } from 'express-validator';
 import { validatorField } from '../middleware/validator-fields';
 
 import { createUser, deleteUser, getUser, getUsers, updateUser } from '../controller/user-controller';
-import { validatorRole,validatorEmail } from '../helpers/db-validators';
+import { validatorRole,validatorEmail,validaotorMongoId } from '../helpers/db-validators';
 
 
 const userRouter = Router()
@@ -24,8 +24,18 @@ userRouter.post("/",[
     validatorField
 ],createUser)
 
-userRouter.put("/:id",updateUser)
+userRouter.put("/:id",[
+    check("id","the id is not valid").isMongoId(),
+    check("id").custom(id=>validaotorMongoId(id)),
+    check("rol").custom(rol => validatorRole(rol)),
+    validatorField
+],updateUser)
 
-userRouter.delete("/:id",deleteUser)
+userRouter.delete("/:id",[
+    check("id","the id is not valid").isMongoId(),
+    check("id").custom(id=>validaotorMongoId(id)),
+    check("rol").custom(rol => validatorRole(rol)),
+    validatorField
+],deleteUser)
 
 export default userRouter;
