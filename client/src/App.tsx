@@ -6,6 +6,8 @@ import Profile from './pages/profile';
 import NewProfile from './pages/newProfile';
 import './styles/index.scss';
 import Wheather from './pages/wheather';
+import Login from './pages/login';
+import Register from './pages/register';
 
 
 
@@ -15,6 +17,9 @@ function App() {
         {/* <Route path="/" element={<App />}> */}
           <Route  path="/" element={<Home />} />
           <Route path="wheather" element={<Wheather/>} /> 
+          <Route path="login" element={<Login/>} /> 
+          <Route path="register" element={<Register/>} /> 
+{/*           <Route path="wheather" element={<Wheather/>} />  */}
          {/*  <Route index element={<Nav />} />   */}
           <Route path="profile" element={<Profile />}>
             <Route path=":profileId" element={<Profile />} />
