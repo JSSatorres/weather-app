@@ -1,4 +1,5 @@
 import React from 'react'
+import "./showCityWheather.scss"
 
 
 /* 
@@ -22,15 +23,17 @@ interface cityData{
 const ShowCityWheather = ({city}:cities) => {
 
   return (
-    <div>
-      
-      {city.map((oneCity,index)=>{
+    <div className='ShowCityWheatheContainer'>
+       <h3 className='ShowCityWheatheContainer__name'> {city[0].name}</h3>
+      {(city[0].name==="")
+      ?<div className='noCity'><h3>Add a city</h3></div>
+      :city.map((oneCity,index)=>{
         return(
-          <div key={index}>
-            <h4> {oneCity.name}</h4>
-            <h5> {oneCity.country}</h5>
-            <h5> {oneCity.state}</h5>
-            <button onClick={()=>console.log(index)}>look wheather</button>
+          <div className= 'ShowCityWheatheContainer__div' key={index}>
+           
+            <h5 className='ShowCityWheatheContainer__div__country'> {oneCity.country}</h5>
+            <h5 className='ShowCityWheatheContainer__div__state'> {oneCity.state}</h5>
+            <button className="ShowCityWheatheContainer__div__button" onClick={()=>console.log(index)}>select</button>
           </div>
         ) 
       })}
