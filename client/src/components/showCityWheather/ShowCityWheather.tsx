@@ -1,20 +1,15 @@
 import React from 'react'
 import "./showCityWheather.scss"
+import {cityDataToSearch} from "../../types"
 
-interface cityData{
-  name:string,
-  country:string,
-  state:string,
-  lon:number,
-  lat:number,
-  msg?:string,
-}
   interface cities {
-    city: Array<cityData> 
+    city: Array<cityDataToSearch>,
+    cityWeatherResult : (city:cityDataToSearch)=>void
   }
 
-const ShowCityWheather = ({city}:cities) => {
-console.log("aqui que tengo",city);
+const ShowCityWheather = ({city, cityWeatherResult}:cities) => {
+
+  const handleLonLat = (oneCity:cityDataToSearch) => cityWeatherResult(oneCity)  
 
   return (
     <div className='ShowCityWheatheContainer'>
@@ -28,7 +23,7 @@ console.log("aqui que tengo",city);
               <div className= 'ShowCityWheatheContainer__div' key={index}>              
                 <h5 className='ShowCityWheatheContainer__div__country'> {oneCity?.country}</h5>
                 <h5 className='ShowCityWheatheContainer__div__state'> {oneCity?.state}</h5>
-                <button className="ShowCityWheatheContainer__div__button" onClick={()=>console.log(index)}>select</button>
+                <button className="ShowCityWheatheContainer__div__button" onClick={()=>handleLonLat(oneCity)}>select</button>
               </div>
             ) 
       })}

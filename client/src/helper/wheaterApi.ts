@@ -1,25 +1,23 @@
 
 interface cityInfo {
-    lon:Number,
-    lat:Number,
-    name:String,
-    country:String,
-    state:String
+    lon:number,
+    lat:number,
+    name:string,
+    country:string,
+    state:string
 }
 
-const wheatherApi = async (city:String)=>{
+const api_key =  process.env.REACT_APP_APITOKEN;
 
-    const api_key =  process.env.REACT_APP_APITOKEN;
+export const wheatherApiCity = async (city:string)=>{
+
     const apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${api_key}`
-
     
-
     const response = await fetch(apiUrl)
     const data = await response.json()
     console.log(data);
 
     if (data.length===0) {
-        console.log("por aqui no paso");
         return [{msg:"this city does not exist"}]
     }
     
@@ -27,14 +25,28 @@ const wheatherApi = async (city:String)=>{
         const{lon, lat, name, country, state,...rest} = city
         return {lon, lat, name, country, state,rest}
     })
-
-    console.log(allMatchCities);
     
    return  allMatchCities
-   /*  const {country ,name}=data.location 
-    const {weather_icons,observation_time, temperature}= data.current    
-    const cleanData = {country,name,weather_icons,observation_time,temperature} 
-    return cleanData   */
 }
 
-export default wheatherApi
+export const wheatherApiLonLat = async (city:cityInfo)=>{
+    
+    const {lat,lon} =city
+    const apiUrl = ` https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`
+    
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+    console.log(data);
+
+    const {name ,base} =data
+    const {feels_like,humidity,pressure,temp} = data.main
+    const {main, description} = data.weather[0]
+    const {speed } =data.wind
+ 
+
+    return{name,base,feels_like,humidity,pressure,temp,main, description,speed,lat,lon}
+}
+
+
+
+

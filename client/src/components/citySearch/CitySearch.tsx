@@ -1,5 +1,4 @@
 import React, { SetStateAction, useState } from 'react'
-import wheatherApi from '../../helper/wheaterApi'
 import "./citySearch.scss";
 
 interface SearchProps {
