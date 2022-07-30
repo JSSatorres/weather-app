@@ -3,12 +3,13 @@ import wheatherApi from '../../helper/wheaterApi'
 import "./citySearch.scss";
 
 interface SearchProps {
-    cityNameData : (city:String)=>SetStateAction<Object>;
+    cityNameData : (city:string)=>SetStateAction<Object>;
 }
 
 const CitySearch = ({cityNameData}:SearchProps) => {
 
-    const [inputValue, setInputValue] = useState<String>("")
+    const [inputValue, setInputValue] = useState<string>("")
+    const [isEmpty, setIsEmpty] = useState<boolean>(false)
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
         setInputValue(e.target.value)
@@ -18,11 +19,20 @@ const CitySearch = ({cityNameData}:SearchProps) => {
       const handleClear = ()=>{
         setInputValue("")    
       }
-    
-      const handleSubmit = (e:React.FormEvent<HTMLButtonElement>)=>{
+
+      const handleEmpty = (e:React.FormEvent<HTMLButtonElement>)=>{
         e.preventDefault()
-        cityNameData(inputValue)       
-        setInputValue("")         
+        if (inputValue==="") {
+          setIsEmpty(true)
+        }else{
+          setIsEmpty(false)
+          handleSubmit() 
+        }              
+      }
+    
+      const handleSubmit = ()=>{
+        cityNameData(inputValue)         
+        handleClear()       
       }
 
   return (
@@ -33,12 +43,13 @@ const CitySearch = ({cityNameData}:SearchProps) => {
           name='inputValue' 
           onChange={handleChange}
           className="citySearchContainer__input" 
+          value={inputValue}
           autoComplete="off" 
-          //TODO:clear input
         />
+        {isEmpty&& <div className='danger'> the city is empty</div>}
         <button 
           type='submit' 
-          onClick={handleSubmit} 
+          onClick={handleEmpty} 
           className="citySearchContainer__button" 
           >go!
         </button>

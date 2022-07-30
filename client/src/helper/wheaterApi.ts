@@ -19,12 +19,13 @@ const wheatherApi = async (city:String)=>{
     console.log(data);
 
     if (data.length===0) {
-        return {msg:"this city does not exist"}
+        console.log("por aqui no paso");
+        return [{msg:"this city does not exist"}]
     }
     
     const allMatchCities = data.map((city:cityInfo)=>{
-        const{lon, lat, name, country, state} = city
-        return {lon, lat, name, country, state}
+        const{lon, lat, name, country, state,...rest} = city
+        return {lon, lat, name, country, state,rest}
     })
 
     console.log(allMatchCities);
