@@ -1,3 +1,5 @@
+import { number } from "yup"
+
 export interface cityDataToSearch{
     name:string,
     country:string,
@@ -19,4 +21,18 @@ export interface  cityDataToShowTypes{
     speed:number,
     lat:number,
     lon:number
+}
+
+export interface usersTypes {
+  _id: string,
+  name:  string,
+  email:  string,
+  rol:  string,
+  state: boolean
+  google: boolean
+}
+
+export interface userAndTotalTypes{
+  total:number,
+  users:Array<usersTypes>
 }
