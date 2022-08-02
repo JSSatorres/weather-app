@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
 
-
 import User from "../models/user-models";
 
+
 export const getUsers = async (req: Request, res: Response) => {  
-  const { limit = 5, since = 0 } = req.query;
+  const { limit = 15, since = 0 } = req.query;
 
   try {
 

@@ -24,12 +24,14 @@ export interface  cityDataToShowTypes{
 }
 
 export interface usersTypes {
-  _id: string,
-  name:  string,
-  email:  string,
-  rol:  string,
-  state: boolean
-  google: boolean
+  user :{
+    _id: string,
+    name:  string,
+    email:  string,
+    rol:  string,
+    state: boolean
+    google: boolean
+  }
 }
 
 export interface userAndTotalTypes{

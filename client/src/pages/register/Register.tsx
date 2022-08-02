@@ -11,7 +11,6 @@ const Register = () => {
     <Nav/>
     <RegisterForm/>
     <AdminController/>
-    <Pokemon/>
     <Footer/>
 </>
   )

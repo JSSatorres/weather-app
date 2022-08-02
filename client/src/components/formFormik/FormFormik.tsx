@@ -10,9 +10,10 @@ import {
 import"./formFormik.scss"
 
   interface MyFormValues {
-    name: string;
-    password: string;
-    email: string;
+    name: string
+    password: string
+    email: string
+    rol:string
   }
 
   const handleSubmitFetch = async(values:MyFormValues)=>{
@@ -24,13 +25,10 @@ import"./formFormik.scss"
   }
    await fetch("http://localhost:4000/api/users",requestOption)
   .then(response => response.json())
-  .then(data=>console.log(data))
 }
 
 const FormFormik = () => {
-    const initialValues: MyFormValues = { name:"", password: "", email:"",};
-
- 
+    const initialValues: MyFormValues = { name:"", password: "", email:"", rol:"USER_ROLE"};
 
     return (
       <div className="wrapper">
@@ -39,9 +37,8 @@ const FormFormik = () => {
          initialValues={initialValues}
          onSubmit={(values, actions) => {
            console.log({ values, actions });
-           alert(JSON.stringify(values, null, 2)); 
+          /*  alert(JSON.stringify(values, null, 2)); */ 
            handleSubmitFetch(values)
-
            actions.setSubmitting(false);
          }}
        >

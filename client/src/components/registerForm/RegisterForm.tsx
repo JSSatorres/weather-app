@@ -1,8 +1,11 @@
 import React from 'react'
+import FormFormik from '../formFormik'
 
 const RegisterForm = () => {
   return (
-    <div>RegisterForm</div>
+    <div>
+      <FormFormik/>
+    </div>
   )
 }
 

@@ -27,7 +27,7 @@ exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser =
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const user_models_1 = __importDefault(require("../models/user-models"));
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { limit = 5, since = 0 } = req.query;
+    const { limit = 15, since = 0 } = req.query;
     try {
         const [total, users] = yield Promise.all([
             user_models_1.default.countDocuments({ state: true }),

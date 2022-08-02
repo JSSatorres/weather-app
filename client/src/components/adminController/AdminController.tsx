@@ -1,15 +1,16 @@
 import React from 'react'
-import {useGetUsersQuery} from '../../store/api/users'
+import {useGetUsersQuery,useGetUserByIdQuery} from '../../store/api/usersSliceApi'
 
 const AdminController = () => {
-    const {data }= useGetUsersQuery(undefined)
-    const users = data?.users
-    console.log(users);
+    const {data:users }= useGetUsersQuery() 
+    const {data:user}=  useGetUserByIdQuery ("62dfdb1774b0259a2a698447")
+    const allUsers = users?.users 
+    console.log(allUsers);
+    console.log(user);
     
   return (
     <div>
-        <h1>User </h1>
-        <h4> isLoading</h4>
+       
 
 
     </div>
