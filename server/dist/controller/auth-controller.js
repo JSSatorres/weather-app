@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const user_models_1 = __importDefault(require("../models/user-models"));
+const generate_jwt_1 = require("../helpers/generate-jwt");
 /**
  *
  * @param req
@@ -25,7 +26,6 @@ const user_models_1 = __importDefault(require("../models/user-models"));
  * generate JWT
  */
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    /*  const { limit = 15, since = 0 } = req.query; */
     const { email, password } = req.body;
     const user = yield user_models_1.default.findOne({ email: email });
     if (!user) {
@@ -38,13 +38,11 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!validPassword) {
         return res.status(400).json({ msg: "the email / password are not corrects - Password" });
     }
+    const token = yield (0, generate_jwt_1.generateJWT)(user.id);
     try {
-        /* const [total, users] = await Promise.all([
-          User.countDocuments({ state: true }),
-          User.find({ state: true }).limit(Number(limit)).skip(Number(since)),
-        ]); */
         res.json({
-            msg: "ok"
+            user,
+            token
         });
     }
     catch (error) {

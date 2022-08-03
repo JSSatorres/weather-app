@@ -5,6 +5,7 @@ const express_validator_1 = require("express-validator");
 const validator_fields_1 = require("../middleware/validator-fields");
 const user_controller_1 = require("../controller/user-controller");
 const db_validators_1 = require("../helpers/db-validators");
+const validator_jwt_1 = require("../middleware/validator-jwt");
 const userRouter = (0, express_1.Router)();
 userRouter.get("/", user_controller_1.getUsers);
 userRouter.get("/:id", user_controller_1.getUser);
@@ -26,9 +27,11 @@ userRouter.put("/:id", [
     validator_fields_1.validatorField
 ], user_controller_1.updateUser);
 userRouter.delete("/:id", [
+    validator_jwt_1.validateJWT,
     (0, express_validator_1.check)("id", "the id is not valid").isMongoId(),
     (0, express_validator_1.check)("id").custom(id => (0, db_validators_1.validaotorMongoId)(id)),
-    (0, express_validator_1.check)("rol").custom(rol => (0, db_validators_1.validatorRole)(rol)),
+    //check("rol").custom(rol => validatorRole(rol)),
+    (0, express_validator_1.check)("rol").isString().withMessage("ADMIN_ROLE"),
     validator_fields_1.validatorField
 ], user_controller_1.deleteUser);
 exports.default = userRouter;

@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
 
 import User from "../models/user-models";
+import { generateJWT } from "../helpers/generate-jwt";
 
 /**
  * 
@@ -14,7 +15,7 @@ import User from "../models/user-models";
  * generate JWT
  */
 export const login = async (req: Request, res: Response) => {  
- /*  const { limit = 15, since = 0 } = req.query; */
+
  const {email,password} = req.body
 
   const user = await User.findOne({email:email})
@@ -30,15 +31,13 @@ export const login = async (req: Request, res: Response) => {
     return res.status(400).json({msg:"the email / password are not corrects - Password"})
   }
 
-  try { 
+  const token = await  generateJWT(user.id)
 
-    /* const [total, users] = await Promise.all([
-      User.countDocuments({ state: true }),
-      User.find({ state: true }).limit(Number(limit)).skip(Number(since)),
-    ]); */
+  try { 
    
     res.json({
-      msg:"ok"
+      user,
+      token
     });
 
   } catch (error :any) {

@@ -1,34 +1,49 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { decrement, increment, incrementByAmount } from '../../store/slices/counter'
+import {
+  Formik,
+  FormikHelpers,
+  FormikProps,
+  Form,
+  Field,
+  FieldProps,
+} from 'formik'
+/* import"./formFormik.scss" */
+
+interface MyFormValues {
+  email: string
+  password: string
+}
 
 const LoginForm = () => {
   const count = useAppSelector(state=>state.counter.value)
   const dispatch = useAppDispatch()
+  const initialValues: MyFormValues = { password: "", email:"", };
+
   return (
-    <div>
-    <div>
-      <button
-        aria-label="Increment value"
-        onClick={() => dispatch(increment())}
-      >
-        Increment
-      </button>
-      <span>{count}</span>
-      <button
-        aria-label="Decrement value"
-        onClick={() => dispatch(decrement())}
-      >
-        Decrement
-      </button>
-      <button
-        aria-label="Increment value"
-        onClick={() => dispatch(incrementByAmount(3))}
-      >
-        Increment 3
-      </button>
-    </div>
+    <div className="wrapper">
+        
+    <Formik
+     initialValues={initialValues}
+     onSubmit={(values, actions) => {
+       console.log({ values, actions });
+        alert(JSON.stringify(values, null, 2)); 
+      /*  handleSubmitFetch(values) */
+       actions.setSubmitting(false);
+     }}
+   >
+      <Form className="wrapper__form" >
+        <h2>Login</h2>
+        <label className="wrapper__form__label" htmlFor="email">Email</label>
+        <Field className="wrapper__form__field" name="email" placeholder="Email" />
+        <label className="wrapper__form__label" htmlFor="password">Password</label>
+        <Field className="wrapper__form__field" name="password" placeholder="add a strog password" />
+        <button  className="wrapper__button"type="submit">Submit</button>
+      </Form>
+    </Formik>
   </div>
+ 
   )
 }
 
