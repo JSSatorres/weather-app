@@ -1,6 +1,16 @@
 import { Schema, model } from "mongoose";
 
-const UserSchema =  new Schema(
+interface UserProp{
+    name:string,
+    email: string,
+    password:string,
+    img:string,
+    rol:string,
+    state:boolean,
+    google:boolean,
+} 
+
+const UserSchema =  new Schema<UserProp>(
   {
     name:{
       type:String,

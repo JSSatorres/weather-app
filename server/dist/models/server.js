@@ -17,10 +17,12 @@ const user_routes_1 = __importDefault(require("../routes/user-routes"));
 const cors_1 = __importDefault(require("cors"));
 const concectionDB_1 = __importDefault(require("../db/concectionDB"));
 const config_1 = require("../config/config");
+const auth_routes_1 = __importDefault(require("../routes/auth-routes"));
 class Server {
     constructor() {
         this.apiPaths = {
-            users: '/api/users'
+            auth: '/api/auth',
+            users: '/api/users',
         };
         this.app = (0, express_1.default)();
         this.port = config_1.PORT || "5000";
@@ -47,6 +49,7 @@ class Server {
         this.app.use(express_1.default.json());
     }
     routes() {
+        this.app.use(this.apiPaths.auth, auth_routes_1.default);
         this.app.use(this.apiPaths.users, user_routes_1.default);
     }
     listen() {

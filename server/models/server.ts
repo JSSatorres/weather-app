@@ -4,13 +4,15 @@ import cors from "cors"
 
 import dbConnectionMongo from "../db/concectionDB";
 import { PORT } from "../config/config";
+import authRouter from "../routes/auth-routes";
 
 class Server {
 
     private app: Application;
     private port: string ;
     private apiPaths={
-        users: '/api/users'
+        auth: '/api/auth',
+        users: '/api/users',
     }
 
     constructor(){
@@ -41,6 +43,7 @@ class Server {
     }
 
     routes (){
+        this.app.use(this.apiPaths.auth, authRouter)
         this.app.use(this.apiPaths.users, userRouter)
     }
 
