@@ -47,6 +47,7 @@ class Server {
         this.app.use((0, cors_1.default)());
         //read body
         this.app.use(express_1.default.json());
+        //this.app.use(express.urlencoded({extended: true}) as RequestHandler); 
     }
     routes() {
         this.app.use(this.apiPaths.auth, auth_routes_1.default);

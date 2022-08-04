@@ -44,8 +44,8 @@ export const getUser = async (req: Request, res: Response) => {
  
 };
 
-export const createUser = async (req: Request, res: Response) => {
 
+export const createUser = async (req: Request, res: Response) => {
   const {name,password,email,rol} =  req.body
     
   try {    
@@ -84,6 +84,7 @@ export const updateUser = async(req: Request, res: Response) => {
 
 export const deleteUser = async(req: Request, res: Response) => {
   const {id}=  req.params
+  
   const user = await User.findByIdAndUpdate(id, { state: false });
   res.json({
     msg: `delete users ${id}`

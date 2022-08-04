@@ -4,6 +4,7 @@ import { validatorField } from '../middleware/validator-fields';
 
 import { createUser, deleteUser, getUser, getUsers, updateUser } from '../controller/user-controller';
 import { validatorRole,validatorEmail,validaotorMongoId } from '../helpers/db-validators';
+import {validateJWT} from "../middleware/validator-jwt"
 
 const userRouter :Router = Router()
 
@@ -31,7 +32,7 @@ userRouter.put("/:id",[
 ],updateUser)
 
 userRouter.delete("/:id",[
-
+    validateJWT,
     check("id","the id is not valid").isMongoId(),
     check("id").custom(id=>validaotorMongoId(id)),
     //check("rol").custom(rol => validatorRole(rol)),

@@ -1,4 +1,4 @@
-import express, {Application} from "express"
+import express, {Application , RequestHandler} from "express"
 import userRouter from "../routes/user-routes";
 import cors from "cors"
 
@@ -39,7 +39,8 @@ class Server {
         this.app.use(cors())
 
         //read body
-        this.app.use(express.json())
+        this.app.use(express.json()); 
+        //this.app.use(express.urlencoded({extended: true}) as RequestHandler); 
     }
 
     routes (){

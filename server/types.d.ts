@@ -1,5 +1,7 @@
 import { Request } from "express"
+import { ObjectId } from "mongoose";
+import { UserProp } from "./models/user-models";
 
 export interface AuthRequest extends Request{
-     uid :string
+     user :UserProp & { _id: ObjectId; } | null,
 }
