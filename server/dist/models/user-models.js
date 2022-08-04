@@ -45,6 +45,7 @@ const UserSchema = new mongoose_1.Schema({
     }
 });
 UserSchema.methods.toJSON = function () {
+    //dont use arrow function to bind this.objet to the model
     const _a = this.toObject(), { __v, password, _id } = _a, user = __rest(_a, ["__v", "password", "_id"]);
     user.uid = _id;
     return user;

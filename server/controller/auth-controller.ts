@@ -30,17 +30,21 @@ export const login = async (req: Request, res: Response) => {
   if (!validPassword) {
     return res.status(400).json({msg:"the email / password are not corrects - Password"})
   }
-
-  const token = await  generateJWT(user.id)
-
+  console.log(user.id);    
+  console.log(req.header);
+  console.log(req.body);
+  
+  
+  
+  /* const token = await generateJWT(user.id) */
   try { 
    
     res.json({
       user,
-      token
+      //token
     });
 
-  } catch (error :any) {
+  } catch (error ) {
     console.log(error);    
     res.status(500).json({msg:"something go wrong"})   
   } 

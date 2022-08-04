@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+import jwt, { Secret } from "jsonwebtoken"
 
 export const generateJWT = (uid:string)=>{
     return new Promise ((resolve,reject)=>{
@@ -6,9 +6,9 @@ export const generateJWT = (uid:string)=>{
         /* onst secretOrPrivateKey: jwt.Secret =process.env.SECRETKEY */
       
         
-        jwt.sign(payload,process.env.SECRETKEY  as string,{
+        jwt.sign(payload, process.env.SECRETKEY as Secret ,{
             expiresIn:"4h"
-        },(err:any,token:any)=>{
+        },(err,token)=>{
             if (err) {
                 console.log(err);
                 reject(" can not generate jwt")

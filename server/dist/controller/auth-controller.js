@@ -38,6 +38,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!validPassword) {
         return res.status(400).json({ msg: "the email / password are not corrects - Password" });
     }
+    console.log(user.id);
     const token = yield (0, generate_jwt_1.generateJWT)(user.id);
     try {
         res.json({

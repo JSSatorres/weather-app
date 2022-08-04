@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
 
-import User from "../models/user-models";
+import User, {UserProp} from "../models/user-models";
 
 
 export const getUsers = async (req: Request, res: Response) => {  
@@ -50,6 +50,7 @@ export const createUser = async (req: Request, res: Response) => {
     
   try {    
     const newUser = await User.create({name,password,email,rol}) 
+    
     //encrrypt password
     const salt = bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password,salt)

@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
-interface UserProp{
+export interface UserProp extends Document{
     name:string,
     email: string,
     password:string,
@@ -8,6 +8,7 @@ interface UserProp{
     rol:string,
     state:boolean,
     google:boolean,
+    uid:string
 } 
 
 const UserSchema =  new Schema<UserProp>(
@@ -44,10 +45,13 @@ const UserSchema =  new Schema<UserProp>(
   }
 })
 
-UserSchema.methods.toJSON=function(){
-  const {__v,password,_id, ...user} = this.toObject()
-  user.uid=_id;
-  return user
+UserSchema.methods.toJSON=function():UserProp{
+    //dont use arrow function to bind this.objet to the model
+    const {__v,password,_id, ...user} = this.toObject()
+    user.uid=_id;
+    return user as UserProp
 }
+
+
 
 export default model("Users", UserSchema);

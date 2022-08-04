@@ -5,16 +5,17 @@ import { validatorField } from '../middleware/validator-fields';
 /* import { createUser, deleteUser, getUser, getUsers, updateUser } from '../controller/user-controller'; */
 import { validatorRole,validatorEmail,validaotorMongoId } from '../helpers/db-validators';
 import { login } from '../controller/auth-controller';
-import { validateJWT } from '../middleware/validator-jwt';
+//import { validateJWT } from '../middleware/validator-jwt';
 
 
-const authRouter = Router()
+const authRouter :Router = Router()
 /* 
 authRouter.get("/",getUsers)
 
 authRouter.get("/:id",getUser) */
 
 authRouter.post("/login",[
+    /* validateJWT, */
     check("email","the email it's not valid ").isEmail(),
     // check("name","the name is required").not().isEmail(),
     check("password","the password is required ").not().isEmpty(),

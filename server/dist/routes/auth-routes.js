@@ -4,6 +4,7 @@ const express_1 = require("express");
 const express_validator_1 = require("express-validator");
 const validator_fields_1 = require("../middleware/validator-fields");
 const auth_controller_1 = require("../controller/auth-controller");
+const validator_jwt_1 = require("../middleware/validator-jwt");
 const authRouter = (0, express_1.Router)();
 /*
 authRouter.get("/",getUsers)
@@ -18,6 +19,7 @@ authRouter.post("/login", [
     //validate the rol with a datebase in mongo
     // check("rol").custom(rol => validatorRole(rol)),
     // check("email").custom(email => validatorEmail(email)),
+    validator_jwt_1.validateJWT,
     validator_fields_1.validatorField
 ], auth_controller_1.login);
 /* authRouter.put("/:id",[
