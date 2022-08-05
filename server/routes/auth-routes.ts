@@ -15,7 +15,7 @@ authRouter.get("/",getUsers)
 authRouter.get("/:id",getUser) */
 
 authRouter.post("/login",[
-    /* validateJWT, */
+    validateJWT, 
     check("email","the email it's not valid ").isEmail(),
     // check("name","the name is required").not().isEmail(),
     check("password","the password is required ").not().isEmpty(),
