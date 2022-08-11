@@ -48,7 +48,11 @@ const Wheather = () => {
         : <div className='wheather__container__result'>
             <CityResult cityDataToShow={cityDataToShow}/> 
           </div>
+          
       } 
+      <div>
+        <p>aa</p>
+       </div>
     </div>
   )
 }
