@@ -1,15 +1,12 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { decrement, increment, incrementByAmount } from '../../store/slices/counter'
+//import { decrement, increment, incrementByAmount } from '../../store/slices/counter'
 import {
   Formik,
-  FormikHelpers,
-  FormikProps,
   Form,
   Field,
-  FieldProps,
 } from 'formik'
-/* import"./formFormik.scss" */
+import"./loginForm.scss" 
 
 interface MyFormValues {
   email: string
@@ -22,7 +19,7 @@ const LoginForm = () => {
   const initialValues: MyFormValues = { password: "", email:"", };
 
   return (
-    <div className="wrapper">
+    <div className="loginForm__wrapper">
         
     <Formik
      initialValues={initialValues}
@@ -33,13 +30,13 @@ const LoginForm = () => {
        actions.setSubmitting(false);
      }}
    >
-      <Form className="wrapper__form" >
+      <Form className="loginForm__wrapper__form" >
         <h2>Login</h2>
-        <label className="wrapper__form__label" htmlFor="email">Email</label>
-        <Field className="wrapper__form__field" name="email" placeholder="Email" />
-        <label className="wrapper__form__label" htmlFor="password">Password</label>
-        <Field className="wrapper__form__field" name="password" placeholder="add a strog password" />
-        <button  className="wrapper__button"type="submit">Submit</button>
+        <label className="loginForm__wrapper__form__label" htmlFor="email">Email</label>
+        <Field className="loginForm__wrapper__form__field" name="email" placeholder="Email" />
+        <label className="loginForm__wrapper__form__label" htmlFor="password">Password</label>
+        <Field className="loginForm__wrapper__form__field" name="password" placeholder="add a strog password" />
+        <button  className="loginForm__wrapper__form__button"type="submit">Submit</button>
       </Form>
     </Formik>
   </div>
