@@ -50,9 +50,6 @@ const Wheather = () => {
           </div>
           
       } 
-      <div>
-        <p>aa</p>
-       </div>
     </div>
   )
 }

@@ -1,12 +1,10 @@
 import React from 'react'
 import {
     Formik,
-    FormikHelpers,
-    FormikProps,
     Form,
     Field,
-    FieldProps,
   } from 'formik'
+
 import"./formFormik.scss"
 
   interface MyFormValues {
@@ -31,7 +29,7 @@ const FormFormik = () => {
     const initialValues: MyFormValues = { name:"", password: "", email:"", rol:"USER_ROLE"};
 
     return (
-      <div className="wrapper">
+      <div className="formFormik__wrapper">
         
         <Formik
          initialValues={initialValues}
@@ -42,15 +40,15 @@ const FormFormik = () => {
            actions.setSubmitting(false);
          }}
        >
-          <Form className="wrapper__form" >
+          <Form className="formFormik__wrapper__form" >
             <h2>Register</h2>
-            <label className="wrapper__form__label" htmlFor="name">User name</label>
-            <Field className="wrapper__form__field" name="name" placeholder="add your user name" />
-            <label className="wrapper__form__label" htmlFor="password">Password</label>
-            <Field className="wrapper__form__field" name="password" placeholder="add a strog password" />
-            <label className="wrapper__form__label" htmlFor="email">Email</label>
-            <Field className="wrapper__form__field" name="email" placeholder="Email" />
-            <button  className="wrapper__button"type="submit">Submit</button>
+            <label className="formFormik__wrapper__form__label" htmlFor="name">User name</label>
+            <Field className="formFormik__wrapper__form__field" name="name" placeholder="add your user name" />
+            <label className="formFormik__wrapper__form__label" htmlFor="password">Password</label>
+            <Field className="formFormik__wrapper__form__field" name="password" placeholder="add a strog password" />
+            <label className="formFormik__wrapper__form__label" htmlFor="email">Email</label>
+            <Field className="formFormik__wrapper__form__field" name="email" placeholder="Email" />
+            <button  className="formFormik__wrapper__form__button"type="submit">Submit</button>
           </Form>
         </Formik>
       </div>

@@ -1,71 +1,45 @@
 @import '../../styles/variables.scss';
 
-.wrapper{
-    height: 500px;
-    background-color: $darkLight;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    color:$light;
-    padding: 150px;
 
-    &__form{
-        color: black;
-        background-color: $light;
-        border-radius:$borderRadius-lg ;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        box-shadow: inset;
-        box-shadow: 2px 3px $tertiary;
+.formFormik__wrapper{
+  height: 65.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
 
-        h2{
-            color:$dark;
-            text-align: center;
-            margin: 6px auto;
-        }
-        
-        &__field{
-            width: 70%;
-            align-items: center;
-            margin: 3px auto; 
-            box-shadow: 1px 0.5px $tertiary;
+  &__form{
+      background:$grey;
+      display: flex;
+      flex-direction: column;
+      padding: 105px 120px;
+      color: $dark;
+      border: 1px solid (120, 120, 120, .4);
+      border-radius: $borderRadius-sm;
+      box-shadow:$boxShadow;
+      width: 80%;
+      min-height:50vh;
 
-        }
-        &__label{
-            width: 70%;
-            align-items: center;
-            margin: 3px auto;
-           
-        }
-    }
-    &__button{
-        width: 70%;
-        margin: 30px auto;
-        min-width: 130px;
-        height: 40px;
-        color:$dark;
-        padding: 5px 10px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        display: inline-block;
-        outline: none;
-        border-radius: 5px;
-        border: none;
-        background: $primary;
-        box-shadow: 0 5px $tertiary;
-     
-      &:hover {
-        box-shadow: 0 3px $tertiary;
-        top: 1px;
+      h2{           
+          margin:0px 0px 20px;
+          display: flex;
+          justify-content: center;
       }
-      &:active {
-        box-shadow: 0 0 $tertiary;
-        top: 5px;
+      
+      &__field{
+          margin-bottom: 8px;
+          display: flex;
+          justify-content: center;
       }
-    
-    }
+      &__label{
+          margin-bottom: 8px;
+          display: flex;
+          justify-content: start;
+      }
+      &__button{
+          @include buttonStandar;
+          margin-top: 13px;
+          width: 60%;
+          align-self:center;
+      }
+  }
 }
