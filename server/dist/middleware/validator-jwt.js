@@ -26,6 +26,9 @@ const validateJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         console.log(payload);
         const { uid } = payload;
         const user = yield user_models_1.default.findById(uid);
+        if (user.state) {
+            return res.status(400).json({ msg: "the user was removed before" });
+        }
         req.user = user;
         next();
     }

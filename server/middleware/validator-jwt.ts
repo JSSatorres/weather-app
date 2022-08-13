@@ -27,6 +27,10 @@ export const validateJWT =async (req:AuthRequest,res: Response,next:NextFunction
         const {uid } = payload  
        
         const user = await User.findById(uid);
+
+        if (user!.state) {
+            return res.status(400).json({msg:"the user was removed before"})
+        }
         req.user= user
         next()
 
