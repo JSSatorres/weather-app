@@ -3,7 +3,6 @@ import { Routes,  Route} from "react-router-dom";
 import Home from './pages/home';
 /* import Nav from './components/nav'; */
 import Profile from './pages/profile';
-import NewProfile from './pages/newProfile';
 import './styles/index.scss';
 import Wheather from './pages/wheather';
 import Login from './pages/login';
@@ -22,8 +21,7 @@ function App() {
 {/*           <Route path="wheather" element={<Wheather/>} />  */}
          {/*  <Route index element={<Nav />} />   */}
           <Route path="profile" element={<Profile />}>
-            <Route path=":profileId" element={<Profile />} />
-            <Route path="new" element={<NewProfile/>} />           
+            <Route path=":profileId" element={<Profile />} />         
           </Route>
          {/* a */}
       </Routes>  
