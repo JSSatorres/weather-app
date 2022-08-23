@@ -70,6 +70,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         newUser.password = bcryptjs_1.default.hashSync(password, salt);
         yield newUser.save();
         res.json({ newUser });
+        console.log(newUser);
     }
     catch (error) {
         console.log(error);

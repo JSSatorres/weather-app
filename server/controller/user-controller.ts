@@ -58,6 +58,8 @@ export const createUser = async (req: Request, res: Response) => {
     await newUser.save() 
 
     res.json({newUser})  
+    console.log(newUser);
+    
 
   } catch (error :any) {
     console.log(error);    

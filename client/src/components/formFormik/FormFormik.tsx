@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import {
     Formik,
     Form,
@@ -7,6 +8,7 @@ import {
 
 import"./formFormik.scss"
 
+
   interface MyFormValues {
     name: string
     password: string
@@ -14,30 +16,38 @@ import"./formFormik.scss"
     rol:string
   }
 
-  const handleSubmitFetch = async(values:MyFormValues)=>{
+  const handleSubmitFetch = async(values:MyFormValues):Promise<number>=>{
        
     const requestOption ={
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify(values),            
   }
-   await fetch("http://localhost:4000/api/users",requestOption)
-  .then(response => response.json())
+  let response = await fetch("http://localhost:4000/api/users",requestOption)
+  //.then(response => response.json()) 
+   return response.status;
+  
+  
 }
 
 const FormFormik = () => {
     const initialValues: MyFormValues = { name:"", password: "", email:"", rol:"USER_ROLE"};
-
+    const navigate = useNavigate();
     return (
       <div className="formFormik__wrapper">
         
         <Formik
          initialValues={initialValues}
-         onSubmit={(values, actions) => {
+         onSubmit={async (values, actions) => {
            console.log({ values, actions });
           /*  alert(JSON.stringify(values, null, 2)); */ 
            handleSubmitFetch(values)
-           actions.setSubmitting(false);
+           const response =  handleSubmitFetch(values)
+           console.log(response);
+
+          if (await response === 200) {            
+            navigate("/")
+          } 
          }}
        >
           <Form className="formFormik__wrapper__form" >
