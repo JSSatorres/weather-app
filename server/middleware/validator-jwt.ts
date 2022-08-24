@@ -14,7 +14,7 @@ interface PayloadProp{
 export const validateJWT =async (req:AuthRequest,res: Response,next:NextFunction)=>{
      
     const token = req.header("x-token")  
-    console.log(token);
+    console.log("eeeer token",token);
        
     if (!token) {
         return res.status(401).json({msg:"no authentifcation user no token"})

@@ -25,25 +25,20 @@ import"./formFormik.scss"
   }
   let response = await fetch("http://localhost:4000/api/users",requestOption)
   //.then(response => response.json()) 
-   return response.status;
-  
-  
+   return response.status;  
 }
 
 const FormFormik = () => {
     const initialValues: MyFormValues = { name:"", password: "", email:"", rol:"USER_ROLE"};
     const navigate = useNavigate();
     return (
-      <div className="formFormik__wrapper">
-        
+      <div className="formFormik__wrapper">        
         <Formik
          initialValues={initialValues}
          onSubmit={async (values, actions) => {
-           console.log({ values, actions });
           /*  alert(JSON.stringify(values, null, 2)); */ 
-           handleSubmitFetch(values)
-           const response =  handleSubmitFetch(values)
-           console.log(response);
+          //handleSubmitFetch(values)
+          const response =  handleSubmitFetch(values)
 
           if (await response === 200) {            
             navigate("/")

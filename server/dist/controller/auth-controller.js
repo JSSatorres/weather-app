@@ -42,6 +42,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
       console.log(req.header);
       console.log(req.body); */
     const token = yield (0, generate_jwt_1.generateJWT)(user.id);
+    console.log(token);
     try {
         res.json({
             user,

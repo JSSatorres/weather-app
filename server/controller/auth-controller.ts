@@ -37,6 +37,8 @@ export const login = async (req: Request, res: Response) => {
   
   
   const token = await generateJWT(user.id) 
+  console.log(token);
+  
   try { 
    
     res.json({

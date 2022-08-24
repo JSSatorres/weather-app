@@ -4,7 +4,6 @@ const express_1 = require("express");
 const express_validator_1 = require("express-validator");
 const validator_fields_1 = require("../middleware/validator-fields");
 const auth_controller_1 = require("../controller/auth-controller");
-const validator_jwt_1 = require("../middleware/validator-jwt");
 //import { validateJWT } from '../middleware/validator-jwt';
 const authRouter = (0, express_1.Router)();
 /*
@@ -12,7 +11,7 @@ authRouter.get("/",getUsers)
 
 authRouter.get("/:id",getUser) */
 authRouter.post("/login", [
-    validator_jwt_1.validateJWT,
+    //validateJWT, 
     (0, express_validator_1.check)("email", "the email it's not valid ").isEmail(),
     // check("name","the name is required").not().isEmail(),
     (0, express_validator_1.check)("password", "the password is required ").not().isEmpty(),

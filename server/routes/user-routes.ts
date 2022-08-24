@@ -32,7 +32,7 @@ userRouter.put("/:id",[
 ],updateUser)
 
 userRouter.delete("/:id",[
-    validateJWT,
+    //validateJWT,
     check("id","the id is not valid").isMongoId(),
     check("id").custom(id=>validaotorMongoId(id)),
     //check("rol").custom(rol => validatorRole(rol)),

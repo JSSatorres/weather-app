@@ -17,7 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_models_1 = __importDefault(require("../models/user-models"));
 const validateJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.header("x-token");
-    console.log(token);
+    console.log("eeeer token", token);
     if (!token) {
         return res.status(401).json({ msg: "no authentifcation user no token" });
     }
