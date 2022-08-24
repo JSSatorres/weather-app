@@ -26,9 +26,11 @@ userRouter.put("/:id", [
     validator_fields_1.validatorField
 ], user_controller_1.updateUser);
 userRouter.delete("/:id", [
+    //validateJWT,
     (0, express_validator_1.check)("id", "the id is not valid").isMongoId(),
     (0, express_validator_1.check)("id").custom(id => (0, db_validators_1.validaotorMongoId)(id)),
-    (0, express_validator_1.check)("rol").custom(rol => (0, db_validators_1.validatorRole)(rol)),
+    //check("rol").custom(rol => validatorRole(rol)),
+    (0, express_validator_1.check)("rol").isString().withMessage("ADMIN_ROLE"),
     validator_fields_1.validatorField
 ], user_controller_1.deleteUser);
 exports.default = userRouter;

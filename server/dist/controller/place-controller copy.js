@@ -100,4 +100,4 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     });
 });
 exports.deleteUser = deleteUser;
-//# sourceMappingURL=user-controller%20copy.js.map
+//# sourceMappingURL=place-controller%20copy.js.map

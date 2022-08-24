@@ -23,19 +23,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser = exports.getUsers = void 0;
+exports.deletePlace = exports.updatePlace = exports.createPlace = exports.getPlace = exports.getPlaces = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const user_models_1 = __importDefault(require("../models/user-models"));
-const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getPlaces = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit = 15, since = 0 } = req.query;
     try {
-        const [total, users] = yield Promise.all([
+        const [total, places] = yield Promise.all([
             user_models_1.default.countDocuments({ state: true }),
             user_models_1.default.find({ state: true }).limit(Number(limit)).skip(Number(since)),
         ]);
         res.json({
             total,
-            users
+            places
         });
     }
     catch (error) {
@@ -43,8 +43,8 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ msg: "something go wrong" });
     }
 });
-exports.getUsers = getUsers;
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getPlaces = getPlaces;
+const getPlace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const user = yield user_models_1.default.findById(id);
@@ -60,8 +60,8 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ msg: "something go wrong" });
     }
 });
-exports.getUser = getUser;
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getPlace = getPlace;
+const createPlace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, password, email, rol } = req.body;
     try {
         const newUser = yield user_models_1.default.create({ name, password, email, rol });
@@ -77,27 +77,27 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(500).json({ msg: "aaaa este eroror adasdad" });
     }
 });
-exports.createUser = createUser;
-const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createPlace = createPlace;
+const updatePlace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const _a = req.body, { _id, password, google, email } = _a, rest = __rest(_a, ["_id", "password", "google", "email"]);
     if (password) {
         const salt = bcryptjs_1.default.genSaltSync();
         rest.password = bcryptjs_1.default.hashSync(password, salt);
     }
-    const user = yield user_models_1.default.findByIdAndUpdate(id, rest);
+    const place = yield user_models_1.default.findByIdAndUpdate(id, rest);
     res.json({
         msg: "put Api",
-        user
+        place
     });
 });
-exports.updateUser = updateUser;
-const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updatePlace = updatePlace;
+const deletePlace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const user = yield user_models_1.default.findByIdAndUpdate(id, { state: false });
     res.json({
-        msg: `delete users ${id}`
+        msg: `delete places ${id}`
     });
 });
-exports.deleteUser = deleteUser;
-//# sourceMappingURL=user-controller%20copy.js.map
+exports.deletePlace = deletePlace;
+//# sourceMappingURL=place-controller.js.map

@@ -1,10 +1,11 @@
 import express, {Application , RequestHandler} from "express"
-import userRouter from "../routes/user-routes";
 import cors from "cors"
 
 import dbConnectionMongo from "../db/concectionDB";
 import { PORT } from "../config/config";
+import userRouter from "../routes/user-routes";
 import authRouter from "../routes/auth-routes";
+import placeRouter from "../routes/place-routes";
 
 class Server {
 
@@ -13,6 +14,7 @@ class Server {
     private apiPaths={
         auth: '/api/auth',
         users: '/api/users',
+        place: '/api/place',
     }
 
     constructor(){
@@ -46,6 +48,7 @@ class Server {
     routes (){
         this.app.use(this.apiPaths.auth, authRouter)
         this.app.use(this.apiPaths.users, userRouter)
+        this.app.use(this.apiPaths.place, placeRouter)
     }
 
     listen(){

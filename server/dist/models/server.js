@@ -13,16 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const user_routes_1 = __importDefault(require("../routes/user-routes"));
 const cors_1 = __importDefault(require("cors"));
 const concectionDB_1 = __importDefault(require("../db/concectionDB"));
 const config_1 = require("../config/config");
+const user_routes_1 = __importDefault(require("../routes/user-routes"));
 const auth_routes_1 = __importDefault(require("../routes/auth-routes"));
+const place_routes_1 = __importDefault(require("../routes/place-routes"));
 class Server {
     constructor() {
         this.apiPaths = {
             auth: '/api/auth',
             users: '/api/users',
+            place: '/api/place',
         };
         this.app = (0, express_1.default)();
         this.port = config_1.PORT || "5000";
@@ -52,6 +54,7 @@ class Server {
     routes() {
         this.app.use(this.apiPaths.auth, auth_routes_1.default);
         this.app.use(this.apiPaths.users, user_routes_1.default);
+        this.app.use(this.apiPaths.place, place_routes_1.default);
     }
     listen() {
         this.app.listen(this.port, () => console.log("the server is running in", this.port));
