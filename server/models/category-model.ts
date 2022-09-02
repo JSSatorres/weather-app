@@ -1,5 +1,12 @@
 import { Schema, model } from "mongoose";
 
+export interface CategoryProp extends Document{
+    name:string,
+    state:boolean,
+    id:string
+    user:string
+} 
+
 const CategorySchema = new Schema({
     name:{
         type:String,
@@ -16,4 +23,4 @@ const CategorySchema = new Schema({
         required:true
     }
 })
-export default model("Roles",CategorySchema)
+export default model("Category",CategorySchema)

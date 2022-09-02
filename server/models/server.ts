@@ -6,6 +6,8 @@ import { PORT } from "../config/config";
 import userRouter from "../routes/user-routes";
 import authRouter from "../routes/auth-routes";
 import placeRouter from "../routes/place-routes";
+import categoryRouter from "../routes/category-routes";
+
 
 class Server {
 
@@ -15,6 +17,7 @@ class Server {
         auth: '/api/auth',
         users: '/api/users',
         place: '/api/place',
+        category: '/api/category',
     }
 
     constructor(){
@@ -49,6 +52,7 @@ class Server {
         this.app.use(this.apiPaths.auth, authRouter)
         this.app.use(this.apiPaths.users, userRouter)
         this.app.use(this.apiPaths.place, placeRouter)
+        this.app.use(this.apiPaths.category, categoryRouter)
     }
 
     listen(){

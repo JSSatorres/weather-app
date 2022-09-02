@@ -23,15 +23,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser = exports.getUsers = void 0;
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const user_models_1 = __importDefault(require("../models/user-models"));
-const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteCategory = exports.updateCategory = exports.createCategory = exports.getCategory = exports.getCategories = void 0;
+const category_model_1 = __importDefault(require("../models/category-model"));
+const getCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit = 15, since = 0 } = req.query;
     try {
         const [total, users] = yield Promise.all([
-            user_models_1.default.countDocuments({ state: true }),
-            user_models_1.default.find({ state: true }).limit(Number(limit)).skip(Number(since)),
+            category_model_1.default.countDocuments({ state: true }),
+            category_model_1.default.find({ state: true }).limit(Number(limit)).skip(Number(since)),
         ]);
         res.json({
             total,
@@ -43,11 +42,11 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ msg: "something go wrong" });
     }
 });
-exports.getUsers = getUsers;
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCategories = getCategories;
+const getCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const user = yield user_models_1.default.findById(id);
+        const user = yield category_model_1.default.findById(id);
         if (user) {
             res.json({ user });
         }
@@ -60,44 +59,45 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ msg: "something go wrong" });
     }
 });
-exports.getUser = getUser;
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, password, email, rol } = req.body;
+exports.getCategory = getCategory;
+const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const name = req.body.name.toUpperCase();
+    console.log(name);
     try {
-        const newUser = yield user_models_1.default.create({ name, password, email, rol });
-        //encrrypt password
-        const salt = bcryptjs_1.default.genSaltSync(10);
-        newUser.password = bcryptjs_1.default.hashSync(password, salt);
-        yield newUser.save();
-        res.json({ newUser });
-        console.log(newUser);
+        const categoryDB = yield category_model_1.default.findOne({ name });
+        if (categoryDB) {
+            return res.status(400).json({ msg: `la categoria ${name} ya existe` });
+        }
+        const newCategory = yield category_model_1.default.create({
+            name,
+            /* user:, */
+        });
+        yield newCategory.save();
+        res.json({ name });
+        console.log(name);
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ msg: "the user controller fail" });
+        res.status(500).json({ msg: "why" });
     }
 });
-exports.createUser = createUser;
-const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createCategory = createCategory;
+const updateCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const _a = req.body, { _id, password, google, email } = _a, rest = __rest(_a, ["_id", "password", "google", "email"]);
-    if (password) {
-        const salt = bcryptjs_1.default.genSaltSync();
-        rest.password = bcryptjs_1.default.hashSync(password, salt);
-    }
-    const user = yield user_models_1.default.findByIdAndUpdate(id, rest);
+    const user = yield category_model_1.default.findByIdAndUpdate(id, rest);
     res.json({
         msg: "put Api",
         user
     });
 });
-exports.updateUser = updateUser;
-const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateCategory = updateCategory;
+const deleteCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const user = yield user_models_1.default.findByIdAndUpdate(id, { state: false });
+    const user = yield category_model_1.default.findByIdAndUpdate(id, { state: false });
     res.json({
         msg: `delete users ${id}`
     });
 });
-exports.deleteUser = deleteUser;
-//# sourceMappingURL=user-controller.js.map
+exports.deleteCategory = deleteCategory;
+//# sourceMappingURL=category-controller.js.map

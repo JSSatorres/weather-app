@@ -17,5 +17,5 @@ const CategorySchema = new mongoose_1.Schema({
         required: true
     }
 });
-exports.default = (0, mongoose_1.model)("Roles", CategorySchema);
+exports.default = (0, mongoose_1.model)("Category", CategorySchema);
 //# sourceMappingURL=category-model.js.map

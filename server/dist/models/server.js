@@ -19,12 +19,14 @@ const config_1 = require("../config/config");
 const user_routes_1 = __importDefault(require("../routes/user-routes"));
 const auth_routes_1 = __importDefault(require("../routes/auth-routes"));
 const place_routes_1 = __importDefault(require("../routes/place-routes"));
+const category_routes_1 = __importDefault(require("../routes/category-routes"));
 class Server {
     constructor() {
         this.apiPaths = {
             auth: '/api/auth',
             users: '/api/users',
             place: '/api/place',
+            category: '/api/category',
         };
         this.app = (0, express_1.default)();
         this.port = config_1.PORT || "5000";
@@ -55,6 +57,7 @@ class Server {
         this.app.use(this.apiPaths.auth, auth_routes_1.default);
         this.app.use(this.apiPaths.users, user_routes_1.default);
         this.app.use(this.apiPaths.place, place_routes_1.default);
+        this.app.use(this.apiPaths.category, category_routes_1.default);
     }
     listen() {
         this.app.listen(this.port, () => console.log("the server is running in", this.port));

@@ -63,7 +63,7 @@ export const createUser = async (req: Request, res: Response) => {
 
   } catch (error :any) {
     console.log(error);    
-    res.status(500).json({msg:"aaaa este eroror adasdad"})   
+    res.status(500).json({msg:"the user controller fail"})   
   }
 };
 
